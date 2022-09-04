@@ -20,6 +20,12 @@ struct Arg {
 
     #[clap(short, long, value_hint = ValueHint::FilePath)]
     output: Option<PathBuf>,
+
+    #[clap(short, long, default_value_t = 2)]
+    state_size: usize,
+
+    #[clap(short, long, default_value_t = 100)]
+    repeat: usize,
 }
 
 fn main() {
@@ -27,4 +33,7 @@ fn main() {
 
     // Load resource
     let source = io::load_source(args.input.as_deref());
+    let tokens = tokenize::tokenize(&source);
+    // Create chain
+    let chain = markov::build_chain(&tokens, &args.state_size);
 }
