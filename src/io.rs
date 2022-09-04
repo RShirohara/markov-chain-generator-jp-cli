@@ -1,6 +1,10 @@
+use markov::Chain;
 use std::fs;
 use std::io::stdin;
+use std::io::stdout;
+use std::io::BufWriter;
 use std::io::Read;
+use std::io::Write;
 use std::path::Path;
 
 // Load resource
@@ -29,3 +33,13 @@ fn load_stdin() -> String {
 }
 
 // Write resource
+
+pub fn write_stdout(chain: &Chain<String>, repeat: &usize) {
+    let stdout = stdout().lock();
+    let mut buffer = BufWriter::new(stdout);
+
+    // Write generated string
+    for s in chain.str_iter_for(*repeat) {
+        writeln!(buffer, "{}", s.replace(" ", "")).unwrap();
+    }
+}
