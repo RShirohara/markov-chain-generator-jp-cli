@@ -1,4 +1,6 @@
-mod libs;
+mod io;
+mod markov;
+mod tokenize;
 
 use std::path::PathBuf;
 
@@ -24,5 +26,5 @@ fn main() {
     let args: Arg = Arg::parse();
 
     // Load resource
-    let source = libs::load_source(args.input.as_deref());
+    let source = io::load_source(args.input.as_deref());
 }
