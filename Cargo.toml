@@ -2,11 +2,19 @@
 name = "markov-chain-generator-jp-cli"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors = ["Ray Shirohara <RShirohara@gmail.com>"]
+description = "Japanese markov chain generator."
+readme = "Readme.md"
+repository = "https://github.com/RShirohara/markov-chain-generator-jp-cli"
+license = "MIT"
+publish = false
 
 [dependencies]
 clap = { version = "3.2.20", features = ["derive"] }
-lindera = "0.14.0"
+lindera = { version = "0.14.0", features = ["ipadic"] }
 markov = "1.1.0"
 regex = "1.6.0"
+
+[[bin]]
+name = "markov"
+path = "src/main.rs"
