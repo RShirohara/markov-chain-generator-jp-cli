@@ -1,0 +1,22 @@
+name: Rust CI
+on:
+  push:
+    paths-ignore:
+      - ".github/**"
+  pull_request:
+    types:
+      - ready_for_review
+    branches:
+      - main
+    paths-ignore:
+      - ".github/**"
+jobs:
+  clippy_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: rustup component add clippy
+      - uses: action-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --all-features
