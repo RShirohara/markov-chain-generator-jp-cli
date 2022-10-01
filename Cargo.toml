@@ -10,7 +10,7 @@ license = "MIT"
 publish = false
 
 [dependencies]
-clap = { version = "3.2.20", features = ["derive"] }
+clap = { version = "4.0.7", features = ["derive"] }
 lindera = { version = "0.17.0", features = ["ipadic"] }
 markov = "1.1.0"
 regex = "1.6.0"
