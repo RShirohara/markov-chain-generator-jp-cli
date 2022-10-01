@@ -1,5 +1,3 @@
-use lindera::formatter::format;
-use lindera::formatter::Format;
 use lindera::mode::Mode;
 use lindera::tokenizer::{DictionaryConfig, DictionaryKind, Tokenizer, TokenizerConfig};
 use regex::Regex;
@@ -27,10 +25,16 @@ pub fn tokenize(source: &str) -> Vec<String> {
     let formatted_source = dup_linebreaks_removed_source.to_string();
 
     // Tokenize
-    let tokens: Vec<String> = formatted_source
+    let tokens = formatted_source
         .lines()
-        .map(|t| tokenizer.tokenize(t).unwrap())
-        .map(|t| format(t, Format::Wakati).unwrap())
+        .map(|line| tokenizer.tokenize(line).unwrap().to_owned())
+        .map(|tokens| {
+            tokens
+                .into_iter()
+                .map(|token| token.text.to_string())
+                .collect::<Vec<String>>()
+                .join(" ")
+        })
         .collect();
 
     return tokens;
