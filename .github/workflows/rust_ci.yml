@@ -21,7 +21,7 @@ jobs:
       - name: Generate Cargo.lock
         uses: actions-rs/cargo@v1
         with:
-          command: genelate-lockfile
+          command: generate-lockfile
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
   clippy:
