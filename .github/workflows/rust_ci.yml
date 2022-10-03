@@ -24,6 +24,8 @@ jobs:
           command: generate-lockfile
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: ${{ github.workflow }}
   clippy:
     runs-on: ubuntu-latest
     needs: build_cache
@@ -39,6 +41,8 @@ jobs:
           override: true
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: ${{ github.workflow }}
       - name: Run clippy
         uses: actions-rs/clippy-check@v1
         with:
