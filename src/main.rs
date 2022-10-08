@@ -2,6 +2,7 @@ mod io;
 mod markov;
 mod tokenize;
 
+use std::io::Error;
 use std::path::PathBuf;
 
 use clap::Parser;
@@ -25,14 +26,17 @@ struct Arg {
     repeat: usize,
 }
 
-fn main() {
+fn main() -> Result<(), Error> {
     let args: Arg = Arg::parse();
 
     // Load resource
-    let source = io::load_source(args.input.as_deref());
-    let tokens = tokenize::tokenize(&source);
+    let source = io::load_resource(args.input.as_deref())?;
+    let tokens = tokenize::tokenize(source.as_str());
+
     // Create chain
     let chain = markov::build_chain(&tokens, &args.state_size);
+
     // Write results
-    io::write_stdout(&chain, &args.repeat);
+    io::write_stdout(&chain, &args.repeat)?;
+    Ok(())
 }

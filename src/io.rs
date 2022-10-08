@@ -1,45 +1,38 @@
 use markov::Chain;
 use std::fs;
-use std::io::stdin;
-use std::io::stdout;
-use std::io::BufWriter;
-use std::io::Read;
-use std::io::Write;
+use std::io::{stdin, stdout, BufWriter, Error, Read, Write};
 use std::path::Path;
 
 // Load resource
 
-pub fn load_source(path: Option<&Path>) -> String {
+pub fn load_resource(path: Option<&Path>) -> Result<String, Error> {
     match path {
-        Some(path) => {
-            return load_file(path);
-        }
-        None => {
-            return load_stdin();
-        }
+        Some(path) => read_file(path),
+        None => read_stdin(),
     }
 }
 
-fn load_file(path: &Path) -> String {
-    let content = fs::read_to_string(path).unwrap();
-    return content;
+fn read_file(path: &Path) -> Result<String, Error> {
+    let content = fs::read_to_string(path)?;
+    Ok(content)
 }
 
-fn load_stdin() -> String {
-    let mut stdin = stdin().lock();
+fn read_stdin() -> Result<String, Error> {
+    let stdin = stdin();
     let mut buffer = String::new();
-    stdin.read_to_string(&mut buffer).unwrap();
-    return buffer;
+    stdin.lock().read_to_string(&mut buffer)?;
+    Ok(buffer)
 }
 
 // Write resource
 
-pub fn write_stdout(chain: &Chain<String>, repeat: &usize) {
-    let stdout = stdout().lock();
+pub fn write_stdout(chain: &Chain<String>, repeat: &usize) -> Result<(), Error> {
+    let stdout = stdout();
     let mut buffer = BufWriter::new(stdout);
 
     // Write generated string
     for s in chain.str_iter_for(*repeat) {
-        writeln!(buffer, "{}", s.replace(" ", "")).unwrap();
+        writeln!(buffer, "{}", s.replace(' ', ""))?;
     }
+    Ok(())
 }
