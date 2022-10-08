@@ -5,5 +5,5 @@ pub fn build_chain(source: &Vec<String>, order: &usize) -> Chain<String> {
     for s in source {
         chain.feed_str(s);
     }
-    return chain;
+    chain
 }
