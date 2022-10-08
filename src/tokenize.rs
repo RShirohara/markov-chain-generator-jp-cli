@@ -27,7 +27,7 @@ pub fn tokenize(source: &str) -> Vec<String> {
     // Tokenize
     let tokens = formatted_source
         .lines()
-        .map(|line| tokenizer.tokenize(line).unwrap().to_owned())
+        .map(|line| tokenizer.tokenize(line).unwrap())
         .map(|tokens| {
             tokens
                 .into_iter()
@@ -37,5 +37,5 @@ pub fn tokenize(source: &str) -> Vec<String> {
         })
         .collect();
 
-    return tokens;
+    tokens
 }
