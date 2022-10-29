@@ -5,7 +5,7 @@ on:
       - master
   pull_request:
     paths:
-      - "Cargo.lock"
+      - "Cargo.toml"
       - "**.rs"
 
 jobs:
