@@ -1,11 +1,12 @@
 use lindera::mode::Mode;
-use lindera::tokenizer::{DictionaryConfig, DictionaryKind, Tokenizer, TokenizerConfig};
+use lindera::tokenizer::{DictionaryConfig, Tokenizer, TokenizerConfig};
+use lindera::DictionaryKind;
 use regex::Regex;
 
 pub fn tokenize(source: &str) -> Vec<String> {
     // Setup tokenizer
     let dictionary = DictionaryConfig {
-        kind: DictionaryKind::IPADIC,
+        kind: Some(DictionaryKind::IPADIC),
         path: None,
     };
     let config = TokenizerConfig {
