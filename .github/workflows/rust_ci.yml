@@ -4,6 +4,9 @@ on:
     branches:
       - master
   pull_request:
+    types:
+      - opened
+      - reopened
     paths:
       - "Cargo.toml"
       - "**.rs"
