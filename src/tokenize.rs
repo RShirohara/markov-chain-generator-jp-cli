@@ -13,8 +13,9 @@ pub fn tokenize(source: &str) -> Vec<String> {
         dictionary,
         user_dictionary: None,
         mode: Mode::Normal,
+        with_details: false,
     };
-    let tokenizer = Tokenizer::with_config(config).unwrap();
+    let tokenizer = Tokenizer::from_config(config).unwrap();
 
     // Format text before tokenize
     let cr = Regex::new("\r").unwrap();
