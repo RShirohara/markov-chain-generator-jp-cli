@@ -24,6 +24,8 @@ jobs:
           profile: minimal
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: ${{ github.workflow }}
       - name: Setup probrem matcher
         uses: r7kamura/rust-problem-matchers@v1.1.0
       - name: Build
@@ -43,6 +45,8 @@ jobs:
           override: true
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: ${{ github.workflow }}
       - name: Setup probrem matcher
         uses: r7kamura/rust-problem-matchers@v1.1.0
       - name: Run clippy
