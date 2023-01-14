@@ -38,5 +38,5 @@ fn main() -> Result<(), Error> {
 
     // Write results
     io::write_stdout(&chain, &args.repeat)?;
-    Ok(())
+    return Ok(());
 }

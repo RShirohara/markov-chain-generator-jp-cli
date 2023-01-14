@@ -39,5 +39,5 @@ pub fn tokenize(source: &str) -> Vec<String> {
         })
         .collect();
 
-    tokens
+    return tokens;
 }
