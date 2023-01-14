@@ -21,7 +21,6 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-          profile: minimal
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
         with:
@@ -40,9 +39,7 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-          profile: minimal
           components: clippy
-          override: true
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
         with:
