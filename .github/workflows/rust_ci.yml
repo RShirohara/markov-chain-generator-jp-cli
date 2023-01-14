@@ -12,66 +12,38 @@ on:
       - "**.rs"
 
 jobs:
-  Cache:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          components: clippy
-          override: true
-      - name: Generate Cargo.lock
-        uses: actions-rs/cargo@v1
-        with:
-          command: generate-lockfile
-      - name: Cache dependencies
-        uses: Swatinem/rust-cache@v2
-        with:
-          shared-key: ${{ github.workflow }}
-  Lint:
-    runs-on: ubuntu-latest
-    needs: Cache
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          components: clippy
-          override: true
-      - name: Cache dependencies
-        uses: Swatinem/rust-cache@v2
-        with:
-          shared-key: ${{ github.workflow }}
-      - name: Run clippy
-        uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: --all-features
   Build:
     runs-on: ubuntu-latest
-    needs: Cache
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
           profile: minimal
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v2
+      - name: Setup probrem matcher
+        uses: r7kamura/rust-problem-matchers@v1.1.0
+      - name: Build
+        run: cargo build --release --all-features
+  Lint:
+    runs-on: ubuntu-latest
+    needs: Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          profile: minimal
+          components: clippy
           override: true
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
-        with:
-          shared-key: ${{ github.workflow }}
-      - name: Build
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --release --all-features
+      - name: Setup probrem matcher
+        uses: r7kamura/rust-problem-matchers@v1.1.0
+      - name: Run clippy
+        run: cargo clippy --all-features -- -D warnings
