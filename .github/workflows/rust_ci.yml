@@ -50,4 +50,5 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cargo clippy --all-features -q --message-format=short 2>&1 |
-          reviewdog -f=clippy -reporter=github-check -fail-on-error
+          sed -e "s:\x1b\[[0-9;]*m::g" |
+          reviewdog -f=clippy -reporter=github-check
