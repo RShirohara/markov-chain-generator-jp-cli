@@ -35,6 +35,7 @@ jobs:
       - name: Build
         run: cargo build --all-features --target=${{ matrix.target }}
   lint:
+    name: Lint
     runs-on: ubuntu-latest
     needs: build
     steps:
