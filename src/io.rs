@@ -34,5 +34,5 @@ pub fn write_stdout(chain: &Chain<String>, repeat: &usize) -> Result<(), Error> 
     for s in chain.str_iter_for(*repeat) {
         writeln!(buffer, "{}", s.replace(' ', ""))?;
     }
-    return Ok(());
+    Ok(())
 }
