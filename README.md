@@ -1,12 +1,19 @@
 # markov-chain-generator-jp-cli
 
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/RShirohara/markov-chain-generator-jp-cli/release.yml?logo=github) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/RShirohara/markov-chain-generator-jp-cli?logo=github) ![GitHub](https://img.shields.io/github/license/RShirohara/markov-chain-generator-jp-cli)
+
 Japanese markov chain generator.
+
+## Installation
+
+Download binary from [Releases](https://github.com/RShirohara/markov-chain-generator-jp-cli/releases).
 
 ## Build
 
+Default toolchain: `stable-x86_64-unknown-linux-musl`
+
 ```bash
-cargo build -r
+cargo build --release
 ```
 
 ## Usage
