@@ -1,7 +1,6 @@
 # markov-chain-generator-jp-cli
 
-![LICENSE](https://img.shields.io/github/license/RShirohara/markov-chain-generator-jp-cli)
-
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/RShirohara/markov-chain-generator-jp-cli/release.yml?logo=github) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/RShirohara/markov-chain-generator-jp-cli?logo=github) ![GitHub](https://img.shields.io/github/license/RShirohara/markov-chain-generator-jp-cli)
 Japanese markov chain generator.
 
 ## Build
