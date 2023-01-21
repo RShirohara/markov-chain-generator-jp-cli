@@ -1,6 +1,6 @@
 [package]
 name = "markov-chain-generator-jp-cli"
-version = "0.1.4"
+version = "0.1.5"
 edition = "2021"
 authors = ["Ray Shirohara <RShirohara@gmail.com>"]
 description = "Japanese markov chain generator."
