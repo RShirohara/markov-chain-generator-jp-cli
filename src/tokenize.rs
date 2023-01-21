@@ -13,7 +13,6 @@ pub fn tokenize(source: &str) -> Vec<String> {
         dictionary,
         user_dictionary: None,
         mode: Mode::Normal,
-        with_details: false,
     };
     let tokenizer = Tokenizer::from_config(config).unwrap();
 
@@ -33,7 +32,7 @@ pub fn tokenize(source: &str) -> Vec<String> {
         .map(|tokens| {
             tokens
                 .into_iter()
-                .map(|token| token.text.to_string())
+                .map(|token| token.get_text().to_string())
                 .collect::<Vec<String>>()
                 .join(" ")
         })
