@@ -16,13 +16,28 @@ use clap::ValueHint;
     long_about = None
 )]
 struct Arg {
-    #[clap(short, long, value_hint = ValueHint::FilePath)]
+    #[clap(
+        short,
+        long,
+        value_hint = ValueHint::FilePath,
+        help = "Input text file path"
+    )]
     input: Option<PathBuf>,
 
-    #[clap(short, long, default_value_t = 2)]
+    #[clap(
+        short,
+        long,
+        default_value_t = 2,
+        help = "Number of words in the model's state"
+    )]
     state_size: usize,
 
-    #[clap(short, long, default_value_t = 100)]
+    #[clap(
+        short,
+        long,
+        default_value_t = 100,
+        help = "Number of times to repeat the output"
+    )]
     repeat: usize,
 }
 
