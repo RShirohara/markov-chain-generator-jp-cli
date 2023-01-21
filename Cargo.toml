@@ -11,7 +11,7 @@ publish = false
 
 [dependencies]
 clap = { version = "4.0.7", features = ["derive"] }
-lindera = { version = "0.19.5", features = ["ipadic"] }
+lindera = { version = "0.20.0", features = ["ipadic"] }
 markov = "1.1.0"
 regex = "1.6.0"
 
