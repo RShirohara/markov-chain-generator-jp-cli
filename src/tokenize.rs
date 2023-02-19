@@ -32,7 +32,7 @@ pub fn tokenize(source: &str) -> Vec<String> {
         .map(|tokens| {
             tokens
                 .into_iter()
-                .map(|token| token.get_text().to_string())
+                .map(|token| token.text.to_string())
                 .collect::<Vec<String>>()
                 .join(" ")
         })
