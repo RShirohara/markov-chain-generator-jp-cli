@@ -1,5 +1,6 @@
+use lindera::dictionary::DictionaryConfig;
 use lindera::mode::Mode;
-use lindera::tokenizer::{DictionaryConfig, Tokenizer, TokenizerConfig};
+use lindera::tokenizer::{Tokenizer, TokenizerConfig};
 use lindera::DictionaryKind;
 use regex::Regex;
 
