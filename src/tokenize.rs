@@ -1,7 +1,6 @@
-use lindera::dictionary::DictionaryConfig;
-use lindera::mode::Mode;
-use lindera::tokenizer::{Tokenizer, TokenizerConfig};
-use lindera::DictionaryKind;
+use lindera_core::mode::Mode;
+use lindera_dictionary::{DictionaryConfig, DictionaryKind};
+use lindera_tokenizer::tokenizer::{Tokenizer, TokenizerConfig};
 use regex::Regex;
 
 pub fn tokenize(source: &str) -> Vec<String> {
