@@ -11,7 +11,7 @@ publish = false
 
 [dependencies]
 clap = { version = "4.0.7", features = ["derive"] }
-lindera-core = "0.24.0"
+lindera-core = "0.25.0"
 lindera-dictionary = "0.24.0"
 lindera-tokenizer = { version = "0.25.0", features = ["ipadic"] }
 markov = "1.1.0"
