@@ -2,12 +2,12 @@ name: Rust CI
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     types:
       - opened
-      - reopened
       - ready_for_review
+      - review_requested
     paths:
       - "Cargo.toml"
       - "**.rs"
