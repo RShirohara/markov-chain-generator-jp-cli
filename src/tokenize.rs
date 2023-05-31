@@ -6,7 +6,7 @@ use regex::Regex;
 pub fn tokenize(source: &str) -> Vec<String> {
     // Setup tokenizer
     let dictionary = DictionaryConfig {
-        kind: Some(DictionaryKind::UniDic),
+        kind: Some(DictionaryKind::IPADICNEologd),
         path: None,
     };
     let config = TokenizerConfig {

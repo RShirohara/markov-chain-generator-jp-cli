@@ -13,12 +13,12 @@ publish = false
 clap = { version = "4.0.7", features = ["derive"] }
 lindera-core = "0.25.0"
 lindera-dictionary = { version = "0.25.0", features = [
-  "unidic",
-  "unidic-compress",
+  "ipadic-neologd",
+  "ipadic-neologd-compress",
 ] }
 lindera-tokenizer = { version = "0.25.0", features = [
-  "unidic",
-  "unidic-compress",
+  "ipadic-neologd",
+  "ipadic-neologd-compress",
 ] }
 markov = "1.1.0"
 regex = "1.6.0"
