@@ -1,16 +1,14 @@
-name: Rust CI
+name: Pull Request (Rust package)
+
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    types:
-      - opened
-      - ready_for_review
-      - review_requested
-    paths:
-      - "Cargo.toml"
-      - "**.rs"
+    types: [opened, ready_for_review, review_requested]
+    paths: ["Cargo.toml", "**.rs"]
+  push:
+    branches: [main]
+
+permissions:
+  checks: write
 
 env:
   RUST_TOOLCHAIN_TARGET: x86_64-unknown-linux-musl
@@ -19,43 +17,53 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Setup rust
+
+      - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
           target: ${{ env.RUST_TOOLCHAIN_TARGET }}
+
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
         with:
           shared-key: ${{ github.workflow }}
+
       - name: Build
-        run: cargo build --all-features --target=${{ env.RUST_TOOLCHAIN_TARGET }}
+        run: |
+          cargo build --all-features --target=${{ env.RUST_TOOLCHAIN_TARGET }}
+
   lint:
     name: Lint
     needs: build
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Setup rust
+
+      - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
           target: ${{ env.RUST_TOOLCHAIN_TARGET }}
-          components: clippy
+
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
         with:
           shared-key: ${{ github.workflow }}
+
       - name: Setup reviewdog
         uses: reviewdog/action-setup@v1
+
       - name: Run clippy
+        run: |
+          cargo clippy --all-features --no-deps --target=${{ env.RUST_TOOLCHAIN_TARGET }} -q --message-format=short 2>&1 |
+          reviewdog -f=clippy -reporter=github-check -level=warning
         env:
           CARGO_TERM_COLOR: never
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cargo clippy --all-features --no-deps --target=${{ env.RUST_TOOLCHAIN_TARGET }} -q --message-format=short 2>&1 |
-          reviewdog -f=clippy -reporter=github-check

@@ -1,11 +1,13 @@
 version: 2
+
 updates:
+  # Cargo Crates
   - package-ecosystem: "cargo"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "saturday"
-      time: "09:00"
+      time: "03:00"
       timezone: "Asia/Tokyo"
     labels:
       - "Type: Dependencies"
@@ -13,12 +15,14 @@ updates:
       - "RShirohara"
     reviewers:
       - "RShirohara"
+
+  # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "saturday"
-      time: "09:00"
+      time: "03:00"
       timezone: "Asia/Tokyo"
     labels:
       - "Type: CI"

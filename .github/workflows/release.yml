@@ -1,8 +1,12 @@
 name: Release
+
 on:
   release:
     types:
       - published
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -16,10 +20,12 @@ jobs:
             os: ubuntu-latest
             target: x86_64-unknown-linux-musl
             archive: tar.gz
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Compile and release
+
+      - name: Build and Release
         uses: rust-build/rust-build.action@v1.4.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
