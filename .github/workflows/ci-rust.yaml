@@ -1,4 +1,4 @@
-name: CI (Rust package)
+name: CI (Rust crate)
 
 on:
   pull_request:
