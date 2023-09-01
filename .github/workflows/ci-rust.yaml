@@ -31,7 +31,8 @@ jobs:
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
         with:
-          shared-key: ${{ github.workflow }}
+          key: rust-cache-${{ hashFiles('./Cargo.toml') }}
+          shared-key: rust-cache-
 
       - name: Build
         run: |
