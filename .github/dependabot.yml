@@ -15,6 +15,10 @@ updates:
       - "RShirohara"
     reviewers:
       - "RShirohara"
+    groups:
+      lindera:
+        patterns:
+          - "lindera-*"
 
   # GitHub Actions
   - package-ecosystem: "github-actions"
