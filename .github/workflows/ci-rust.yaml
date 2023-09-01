@@ -28,7 +28,7 @@ jobs:
           toolchain: stable
           target: ${{ env.RUST_TOOLCHAIN_TARGET }}
 
-      - name: Cache dependencies
+      - name: Setup dependencies cache
         uses: Swatinem/rust-cache@v2
         with:
           key: rust-cache-${{ hashFiles('./Cargo.toml') }}
