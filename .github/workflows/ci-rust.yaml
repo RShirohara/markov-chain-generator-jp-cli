@@ -1,9 +1,9 @@
-name: Pull Request (Rust package)
+name: CI (Rust crate)
 
 on:
   pull_request:
     types: [opened, ready_for_review, review_requested]
-    paths: ["Cargo.toml", "**.rs"]
+    paths: ["Cargo.toml", "**.rs", ".github/workflows/ci-rust.yaml"]
   push:
     branches: [main]
 
@@ -28,14 +28,17 @@ jobs:
           toolchain: stable
           target: ${{ env.RUST_TOOLCHAIN_TARGET }}
 
-      - name: Cache dependencies
+      - name: Setup dependencies cache
         uses: Swatinem/rust-cache@v2
         with:
-          shared-key: ${{ github.workflow }}
+          key: rust-cache-${{ hashFiles('./Cargo.toml') }}
+          shared-key: rust-cache-
 
       - name: Build
         run: |
-          cargo build --all-features --target=${{ env.RUST_TOOLCHAIN_TARGET }}
+          cargo build \
+            --all-features \
+            --target=${{ env.RUST_TOOLCHAIN_TARGET }}
 
   lint:
     name: Lint
@@ -61,9 +64,19 @@ jobs:
         uses: reviewdog/action-setup@v1
 
       - name: Run clippy
-        run: |
-          cargo clippy --all-features --no-deps --target=${{ env.RUST_TOOLCHAIN_TARGET }} -q --message-format=short 2>&1 |
-          reviewdog -f=clippy -reporter=github-check -level=warning
         env:
           CARGO_TERM_COLOR: never
+          REVIEWDOG_FORMAT: clippy
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REVIEWDOG_REPORTER: github-check
+        run: |
+          cargo clippy \
+            -q \
+            --all-features \
+            --no-deps \
+            --target=${{ env.RUST_TOOLCHAIN_TARGET }} \
+            --message-format=short 2>&1 \
+          | reviewdog \
+              -f="${REVIEWDOG_FORMAT}" \
+              --name="Lint result (${REVIEWDOG_FORMAT})" \
+              --reporter="${REVIEWDOG_REPORTER}" \
