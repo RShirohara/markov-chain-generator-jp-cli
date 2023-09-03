@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.6.0
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
@@ -29,10 +29,11 @@ jobs:
           target: ${{ env.RUST_TOOLCHAIN_TARGET }}
 
       - name: Setup dependencies cache
-        uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@v2.6.2
         with:
-          key: rust-cache-${{ hashFiles('./Cargo.toml') }}
-          shared-key: rust-cache-
+          prefix-key: rust-cache
+          shared-key: ${{ hashFiles('./Cargo.toml') }}
+          key: ""
 
       - name: Build
         run: |
@@ -47,7 +48,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.6.0
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
@@ -56,12 +57,14 @@ jobs:
           target: ${{ env.RUST_TOOLCHAIN_TARGET }}
 
       - name: Cache dependencies
-        uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@v2.6.2
         with:
-          shared-key: ${{ github.workflow }}
+          prefix-key: rust-cache
+          shared-key: ${{ hashFiles('./Cargo.toml') }}
+          key: ""
 
       - name: Setup reviewdog
-        uses: reviewdog/action-setup@v1
+        uses: reviewdog/action-setup@v1.0.6
 
       - name: Run clippy
         env:
