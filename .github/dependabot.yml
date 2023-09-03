@@ -15,6 +15,7 @@ updates:
       - "RShirohara"
     reviewers:
       - "RShirohara"
+    versioning-strategy: increase
     groups:
       lindera:
         patterns:
