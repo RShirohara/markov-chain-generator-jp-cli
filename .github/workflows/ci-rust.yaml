@@ -3,7 +3,8 @@ name: CI (Rust crate)
 on:
   pull_request:
     types: [opened, ready_for_review, review_requested]
-    paths: ["Cargo.toml", "**.rs", ".github/workflows/ci-rust.yaml"]
+    paths:
+      ["Cargo.toml", "Cargo.lock", "**.rs", ".github/workflows/ci-rust.yaml"]
   push:
     branches: [main]
 
@@ -32,7 +33,7 @@ jobs:
         uses: Swatinem/rust-cache@v2.6.2
         with:
           prefix-key: rust-cache
-          shared-key: ${{ hashFiles('./Cargo.toml') }}
+          shared-key: ${{ hashFiles('./Cargo.lock') }}
           key: ""
 
       - name: Build
@@ -60,7 +61,7 @@ jobs:
         uses: Swatinem/rust-cache@v2.6.2
         with:
           prefix-key: rust-cache
-          shared-key: ${{ hashFiles('./Cargo.toml') }}
+          shared-key: ${{ hashFiles('./Cargo.lock') }}
           key: ""
 
       - name: Setup reviewdog
