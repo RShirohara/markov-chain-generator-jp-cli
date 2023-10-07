@@ -21,7 +21,7 @@ lindera-tokenizer = { version = "0.27.0", features = [
   "unidic-compress",
 ] }
 markov = "1.1.0"
-regex = "1.6.0"
+regex = "1.9.6"
 
 [[bin]]
 name = "markov"
