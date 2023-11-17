@@ -10,7 +10,7 @@ license = "MIT"
 publish = false
 
 [dependencies]
-clap = { version = "4.4.7", features = ["derive"] }
+clap = { version = "4.4.8", features = ["derive"] }
 lindera-core = "0.27.0"
 lindera-dictionary = { version = "0.27.0", features = [
   "unidic",
