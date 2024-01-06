@@ -11,12 +11,12 @@ publish = false
 
 [dependencies]
 clap = { version = "4.4.13", features = ["derive"] }
-lindera-core = "0.27.0"
-lindera-dictionary = { version = "0.27.0", features = [
+lindera-core = "0.27.2"
+lindera-dictionary = { version = "0.27.2", features = [
   "unidic",
   "unidic-compress",
 ] }
-lindera-tokenizer = { version = "0.27.0", features = [
+lindera-tokenizer = { version = "0.27.2", features = [
   "unidic",
   "unidic-compress",
 ] }
