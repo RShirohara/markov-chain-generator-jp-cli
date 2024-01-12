@@ -30,7 +30,7 @@ jobs:
           target: ${{ env.RUST_TOOLCHAIN_TARGET }}
 
       - name: Setup dependencies cache
-        uses: Swatinem/rust-cache@v2.7.1
+        uses: Swatinem/rust-cache@v2.7.2
         with:
           prefix-key: rust-cache
           shared-key: ${{ hashFiles('./Cargo.lock') }}
@@ -58,7 +58,7 @@ jobs:
           target: ${{ env.RUST_TOOLCHAIN_TARGET }}
 
       - name: Cache dependencies
-        uses: Swatinem/rust-cache@v2.7.1
+        uses: Swatinem/rust-cache@v2.7.2
         with:
           prefix-key: rust-cache
           shared-key: ${{ hashFiles('./Cargo.lock') }}
